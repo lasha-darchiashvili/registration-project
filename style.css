@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.firstwrapper {
+  display: flex;
+}
+
+.rightpage {
+  background-color: #fd5334;
+  flex-grow: 1;
+}
+
+.header {
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  background-color: #7025fb;
+}
+
+section {
+  height: 94vh;
+  overflow: hidden;
+}
+
+.mainimg {
+  height: 100%;
+}
+
+.pagetitle {
+  color: #ffffff;
+  letter-spacing: 0.1rem;
+  font-size: 2.2rem;
+}
+
+.chesslogo {
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+  width: 3.4rem;
+}
+
+.firstquote {
+  font-size: 8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.secondquote {
+  font-size: 2rem;
+  margin-left: 1rem;
+  font-weight: 700;
+}
+
+.thirdquote {
+  font-size: 8rem;
+  font-weight: 800;
+  color: #fff;
+}
+.firstpartquote {
+  display: flex;
+  align-items: center;
+}
+
+.rightpagecontent {
+  margin-top: 20rem;
+  margin-left: 8.5rem;
+}
+
+.startbutton {
+  background-color: #212529;
+  color: #ffffff;
+  padding: 1.2rem 2.4rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8rem;
+  gap: 1rem;
+  margin-top: 12rem;
+}
+
+.startbutton:hover {
+  outline: 0.3rem solid #b197fc;
+}
