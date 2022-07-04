@@ -31,6 +31,7 @@ body {
 section {
   height: 94vh;
   overflow: hidden;
+  width: 78.3rem;
 }
 
 .mainimg {
@@ -77,25 +78,21 @@ section {
   margin-left: 8.5rem;
 }
 
-.pagebutton {
+.buttonlink {
+  text-decoration: none;
   background-color: #212529;
-  cursor: pointer;
   padding: 1.2rem 2.4rem;
-  font-size: 2rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  width: fit-content;
+  color: #ffffff;
+  font-size: 2rem;
   border-radius: 0.8rem;
   gap: 1rem;
 }
 
-.pagebutton:hover {
+.buttonlink:hover {
   outline: 0.3rem solid #b197fc;
-}
-
-.buttonlink {
-  text-decoration: none;
-  color: #ffffff;
 }
 
 .secondpg-leftpagecontent {
@@ -107,12 +104,14 @@ section {
   font-weight: 800;
 }
 
-.secondpg-firstquote {
+.secondpg-firstquote,
+.thirdpg-firstquote {
   font-size: 2.2rem;
   line-height: 4rem;
 }
 
-.secondpg-secondquote {
+.secondpg-secondquote,
+.thirdpg-secondquote {
   font-size: 2rem;
   margin-top: 1.2rem;
   color: #e5e6e8;
@@ -230,7 +229,8 @@ section {
   cursor: text;
 } */
 
-.input-field input {
+.input-field input,
+.selector {
   padding: 0.5rem 2rem;
   border: 0;
   outline: 0;
@@ -243,6 +243,7 @@ section {
   font-size: 2rem;
   font-weight: 400;
   margin-bottom: 2rem;
+  color: #212529;
 }
 
 .greentick {
@@ -301,4 +302,69 @@ input:disabled + label {
 .secondpg-goback:hover {
   border-color: #b197fc;
   background-color: #dee2e6;
+}
+
+.thirdpg-secondquote {
+  color: rgba(9, 63, 104, 1);
+  text-align: end;
+}
+
+.thirdpg-leftpagecontent {
+  position: absolute;
+  top: 22%;
+  left: 3%;
+  width: 53rem;
+  font-weight: 800;
+}
+
+.listswrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.selector-wrapper {
+  flex-grow: 1;
+}
+
+.selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+}
+
+.listwrapper {
+  width: 85rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.forknowledge ul {
+  list-style: none;
+  position: absolute;
+  border: 1px solid rgba(185, 180, 196, 0.3);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  top: 4.6rem;
+  width: 100%;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  background-color: #ffffff;
+}
+
+.forknowledge {
+  position: relative;
+}
+
+.forknowledge ul li {
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  height: 4.4rem;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.forknowledge ul li:hover {
+  font-weight: 600;
+  background-color: #f7f7f9;
 }
