@@ -322,15 +322,10 @@ input:disabled + label {
   gap: 1rem;
 }
 
-.selector-wrapper {
-  flex-grow: 1;
-}
-
 .selector {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: auto;
 }
 
 .listwrapper {
@@ -339,7 +334,8 @@ input:disabled + label {
   gap: 2rem;
 }
 
-.forknowledge ul {
+.knowledgelist,
+.characterlist {
   list-style: none;
   position: absolute;
   border: 1px solid rgba(185, 180, 196, 0.3);
@@ -350,21 +346,74 @@ input:disabled + label {
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
   background-color: #ffffff;
+  max-height: 30rem;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  display: none;
+}
+
+/* class to make knowledge selector active via javascript */
+.active {
+  display: block;
+}
+
+.forcharacter ul::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
+}
+
+.forcharacter ul::-webkit-scrollbar-track {
+  background-color: rgba(233, 236, 239, 1);
+  border-radius: 100px;
+}
+
+.forcharacter ul::-webkit-scrollbar-thumb {
+  background-color: rgba(203, 207, 210, 1);
+  border-radius: 100px;
 }
 
 .forknowledge {
   position: relative;
+  width: 50%;
+}
+
+.forcharacter {
+  position: relative;
+  width: 50%;
 }
 
 .forknowledge ul li {
   padding: 0.5rem 2rem;
-  background-color: transparent;
   height: 4.4rem;
   font-size: 2rem;
   font-weight: 400;
+  cursor: pointer;
 }
 
-.forknowledge ul li:hover {
+.forknowledge ul li:hover,
+.forcharacter ul li:hover {
   font-weight: 600;
   background-color: #f7f7f9;
+}
+
+.characterimg {
+  width: 10rem;
+}
+
+.forcharacter li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.arrow-down {
+  transition: 300ms;
+}
+
+.rotate {
+  transform: rotate(540deg);
 }
