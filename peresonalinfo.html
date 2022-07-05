@@ -24,6 +24,20 @@
       rel="stylesheet"
     />
 
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+
+    <!-- flatpicker -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -35,11 +49,7 @@
         </header>
 
         <section class="section">
-          <img
-            src="./pictures/unsplash_27LH_0jXKYI.png"
-            alt=""
-            class="mainimg"
-          />
+          <img src="./pictures/second-page.png" alt="" class="mainimg" />
           <div class="secondpg-leftpagecontent">
             <p class="secondpg-firstquote">
               <i>"WHEN YOU SEE A GOOD MOVE, LOOK FOR A BETTER ONE."</i>
@@ -72,26 +82,30 @@
         <form action="" class="form-container">
           <p class="pers-inf">Personal Information</p>
           <p class="basic-inf">This Is Basic Information Fields</p>
+
           <div class="input-field valid">
             <input id="username" type="text" class="username" />
             <!-- <label for="username" class="inputlabel">Name</label> -->
             <img src="./pictures/tick.png" alt="tick" class="greentick" />
           </div>
+
           <div class="input-field invalid">
             <input id="email" type="email" class="email" />
             <!-- <label for="email" class="inputlabel">Emal adress</label> -->
             <img src="./pictures/tick.png" alt="tick" class="greentick" />
           </div>
+
           <div class="input-field">
             <input id="tel" type="tel" class="tel" />
             <!-- <label for="tel" class="inputlabel">Phone number</label> -->
             <img src="./pictures/tick.png" alt="tick" class="greentick" />
           </div>
+
           <div class="input-field">
-            <input id="date" type="date" class="date" placeholder="" />
-            <!-- <label for="date" class="inputlabel">Date of birth</label> -->
+            <input type="datetime-local" class="form-control" />
             <img src="./pictures/tick.png" alt="tick" class="greentick" />
           </div>
+
           <div class="forthnback-buttons">
             <a href="/index.html" class="secondpg-goback">Back</a>
 
@@ -106,6 +120,24 @@
         </form>
       </div>
     </div>
+
+    <!-- bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- flatpicker -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+      config = {
+        dateFormat: "m/d/Y",
+      };
+
+      flatpickr("input[type=datetime-local]", config);
+    </script>
 
     <script src="script.js"></script>
   </body>

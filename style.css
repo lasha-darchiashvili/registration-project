@@ -31,7 +31,7 @@ body {
 section {
   height: 94vh;
   overflow: hidden;
-  width: 78.3rem;
+  width: 86rem;
 }
 
 .mainimg {
@@ -131,7 +131,7 @@ section {
 }
 
 .right-header {
-  padding-left: 5rem;
+  padding-left: 10rem;
   font-size: 2rem;
   border-bottom: 1px solid rgba(185, 180, 195, 0.3);
   height: 6vh;
@@ -180,7 +180,7 @@ section {
   align-items: center;
   gap: 0.5rem;
   margin-top: 5rem;
-  margin-left: 12rem;
+  margin-left: 16rem;
 }
 
 .info-block-wrapper,
@@ -217,8 +217,8 @@ section {
 
 .form-container {
   margin-top: 12rem;
-  margin-left: 6rem;
-  width: 85rem;
+  margin-left: 9.8rem;
+  width: 90rem;
   height: 60rem;
   position: relative; /* for buttons */
 }
@@ -459,4 +459,17 @@ small {
 
 p {
   margin-bottom: 0;
+}
+
+/* date input background color was disabled from flatpicker */
+.form-control:enabled {
+  background-color: transparent;
+}
+
+/* flatpicker styles was overwriting my styles  */
+/* and this overwrites flatpicker styles */
+.form-control:focus {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.125);
 }

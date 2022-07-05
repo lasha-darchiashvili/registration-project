@@ -57,3 +57,5 @@ function toggleCharacterClasses() {
 
 // counting characters length and giving number to HTML
 totalCharacters.textContent = `(Total ${characterOptions.length})`;
+
+flatpickr("input[type=datetime-local]", {});
