@@ -41,44 +41,65 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- whole page wrapper -->
     <div class="firstwrapper">
+      <!-- page is divided in two divs, leftpage div and rightpage div -->
+      <!-- this leftpage div contains header, mainimg and content on that image -->
       <div class="leftpage">
         <header class="header">
           <img src="./pictures/Vector.png" alt="chesslogo" class="chesslogo" />
           <h1 class="pagetitle">Redberry Knight Cup</h1>
         </header>
 
+        <!-- mainimg and content on image -->
         <section class="section">
-          <img src="./pictures/second-page.png" alt="" class="mainimg" />
+          <img src="./pictures/second-page.png" alt="mainimg" class="mainimg" />
           <div class="secondpg-leftpagecontent">
             <p class="secondpg-firstquote">
               <i>"WHEN YOU SEE A GOOD MOVE, LOOK FOR A BETTER ONE."</i>
             </p>
+
             <p class="secondpg-secondquote"><i>-EMANUEL LASKER</i></p>
           </div>
         </section>
       </div>
-      <div class="secondpg-rightpage rightpage">
-        <p class="secondpg right-header">Start Creating Your Account</p>
-        <div class="form-counter">
+
+      <!-- this rightpage div contains header, form-page tracker and form itself -->
+      <div class="secondpg-rightpage">
+        <div class="right-header">
+          <p>Start Creating Your Account</p>
+        </div>
+
+        <!-- form tracker, contains 3 divs which are displayed as flex -->
+        <div class="form-tracker">
+          <!-- First flex element -->
           <div class="info-block-wrapper">
             <div class="info block">
-              <p class="numone">1</p>
+              <p class="step-one">1</p>
+
+              <!-- this ticks img is positioned "absolute" and not displayed, eventually it will replace "step-one" -->
               <img src="./pictures/ticks.png" alt="ticks" class="ticks" />
             </div>
-            <p class="info-text">Personal Information</p>
+
+            <!-- this p tag is positioned absolute relative to parent element -->
+            <p class="info-text-step">Personal Information</p>
           </div>
 
+          <!-- Second flex element. white line between num 1 and num 2 on tracker -->
           <div class="line"></div>
 
+          <!-- Third flex element -->
           <div class="exp-block-wrapper">
             <div class="exp block">
-              <p class="numtwo">2</p>
+              <p class="step-two">2</p>
             </div>
-            <p class="exp-text">Chess experience</p>
+
+            <!-- this p tag is positioned absolute, relative to parent element -->
+            <p class="exp-text-step">Chess experience</p>
           </div>
         </div>
 
+        <!-- form element, contains headers, 4 form inputs and 2 buttons -->
         <form action="" class="form-container">
           <p class="pers-inf">Personal Information</p>
           <p class="basic-inf">This Is Basic Information Fields</p>
@@ -102,12 +123,16 @@
           </div>
 
           <div class="input-field">
+            <!-- flatpicker/bootstrap input -->
             <input type="datetime-local" class="form-control" />
+            <!--  -->
+
             <img src="./pictures/tick.png" alt="tick" class="greentick" />
           </div>
 
+          <!-- back and forth buttons/links, absolute positioned relative to form-->
           <div class="forthnback-buttons">
-            <a href="/index.html" class="secondpg-goback">Back</a>
+            <a href="/index.html" class="goback">Back</a>
 
             <a href="/experience.html" class="buttonlink gonext">
               Next
@@ -131,6 +156,7 @@
     <!-- flatpicker -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <!-- flatpicker code -->
     <script>
       config = {
         dateFormat: "m/d/Y",
@@ -138,6 +164,7 @@
 
       flatpickr("input[type=datetime-local]", config);
     </script>
+    <!--  -->
 
     <script src="script.js"></script>
   </body>

@@ -48,7 +48,7 @@ characterOptions.forEach((option) => {
   });
 });
 
-// this function makes "character" drop downl list active/inactive
+// this function makes "character" drop down list active/inactive
 // and rotates arrow icon
 function toggleCharacterClasses() {
   characterlist.classList.toggle("active");
@@ -58,4 +58,33 @@ function toggleCharacterClasses() {
 // counting characters length and giving number to HTML
 totalCharacters.textContent = `(Total ${characterOptions.length})`;
 
-flatpickr("input[type=datetime-local]", {});
+// const overlay = document.querySelector(".overlay");
+
+// overlay.addEventListener("click", function () {
+//   characterlist.classList.remove("active");
+//   characterArrowIcon.classList.remove("rotate");
+
+//   knowledgelist.classList.remove("active");
+//   knowledgeArrowIcon.classList.remove("rotate");
+// });
+
+const elementSmall = document.querySelector("small");
+
+window.addEventListener("click", function (e) {
+  if (
+    knowledgelist.classList.contains("active") &&
+    e.target !== knowledgeInput &&
+    e.target !== knowledgelist
+  ) {
+    knowledgelist.classList.remove("active");
+    knowledgeArrowIcon.classList.toggle("rotate");
+  } else if (
+    characterlist.classList.contains("active") &&
+    e.target !== characterInput &&
+    e.target !== characterlist &&
+    e.target !== elementSmall
+  ) {
+    characterlist.classList.remove("active");
+    characterArrowIcon.classList.toggle("rotate");
+  } else return;
+});

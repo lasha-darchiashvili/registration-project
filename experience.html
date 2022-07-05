@@ -35,15 +35,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- whole page wrapper -->
     <div class="firstwrapper">
+      <!-- page is divided in two divs, leftpage div and rightpage div -->
+      <!-- this leftpage div contains header, mainimg and content on that image -->
       <div class="leftpage">
         <header class="header">
           <img src="./pictures/Vector.png" alt="chesslogo" class="chesslogo" />
           <h1 class="pagetitle">Redberry Knight Cup</h1>
         </header>
 
+        <!-- mainimg and content on image -->
         <section class="section">
-          <img src="./pictures/third-page.png" alt="" class="mainimg" />
+          <img src="./pictures/third-page.png" alt="mainimg" class="mainimg" />
           <div class="thirdpg-leftpagecontent">
             <p class="thirdpg-firstquote">
               <i>"MANY HAVE BECOME CHESS MASTERS;</i>
@@ -57,38 +61,59 @@
           </div>
         </section>
       </div>
-      <div class="secondpg-rightpage rightpage">
-        <p class="secondpg right-header">Start Creating Your Account</p>
-        <div class="form-counter">
+
+      <!-- this rightpage div contains header, form-page tracker and form itself -->
+      <div class="thirdpg-rightpage">
+        <div>
+          <p class="right-header">Start Creating Your Account</p>
+        </div>
+
+        <!-- form tracker, contains 3 divs which are displayed as flex -->
+        <div class="form-tracker">
+          <!-- First flex element -->
           <div class="info-block-wrapper">
             <div class="info block">
-              <p class="numone">1</p>
+              <p class="step-one">1</p>
+
+              <!-- this ticks img is positioned "absolute" and not displayed, eventually it will replace "step-one" -->
               <img src="./pictures/ticks.png" alt="ticks" class="ticks" />
             </div>
-            <p class="info-text">Personal Information</p>
+
+            <!-- this p tag is positioned absolute relative to parent element -->
+            <p class="info-text-step">Personal Information</p>
           </div>
 
+          <!-- Second flex element. white line between num 1 and num 2 on tracker -->
           <div class="line"></div>
 
+          <!-- Third flex element -->
           <div class="exp-block-wrapper">
             <div class="exp block">
-              <p class="numtwo">2</p>
+              <p class="step-two">2</p>
             </div>
-            <p class="exp-text">Chess experience</p>
+
+            <!-- this p tag is positioned absolute, relative to parent element -->
+            <p class="exp-text-step">Chess experience</p>
           </div>
         </div>
 
+        <!-- form element, contains headers, 2 drop down lists in 1 div, question and buttons -->
         <form action="" class="form-container">
           <p class="pers-inf">Chess Experience</p>
           <p class="basic-inf">This Is Basic Information Fields</p>
 
+          <!-- this div contains 2 drop-down lists -->
           <div class="listswrapper">
+            <!-- first drop down list -->
             <div class="selector-wrapper forknowledge">
+              <!-- drop down list input -->
               <div class="selector aroundknowledge">
                 <p class="knowledge">level of knowledge</p>
                 <i class="fa-solid fa-chevron-down arrow-down"></i>
               </div>
 
+              <!-- options as list, positioned absolute relative to parent element -->
+              <!-- block is displayed as none, after click on "level of knowledge" it gets activated -->
               <ul class="knowledgelist">
                 <li>Beginner</li>
                 <li>Intermediate</li>
@@ -96,14 +121,20 @@
               </ul>
             </div>
 
+            <!-- second drop down list -->
             <div class="selector-wrapper forcharacter">
+              <!-- drop down list input -->
               <div class="selector aroundcharacter">
                 <p class="character">Choose your character</p>
                 <i class="fa-solid fa-chevron-down arrow-down"></i>
               </div>
 
+              <!-- options as list, positioned absolute relative to parent element -->
               <ul class="characterlist">
+                <!-- conent in this tag shows total number of options, 2 is conventional, 
+                    it counts after fetching data and then shows  -->
                 <small>(Total 2)</small>
+
                 <li>
                   <p>salamala asda</p>
                   <img
@@ -140,6 +171,7 @@
             </div>
           </div>
 
+          <!-- question block, options radio buttons are from bootstrap -->
           <div class="question-div">
             <p class="question">
               Have you participated in Redberry Championship?
@@ -174,8 +206,9 @@
             </div>
           </div>
 
+          <!-- back and forth buttons/links, absolute positioned relative to form-->
           <div class="forthnback-buttons">
-            <a href="/peresonalinfo.html" class="secondpg-goback">Back</a>
+            <a href="/peresonalinfo.html" class="goback">Back</a>
 
             <a href="./experience.html" class="buttonlink gonext">
               Done
@@ -187,6 +220,8 @@
           </div>
         </form>
       </div>
+
+      <div class="overlay"></div>
     </div>
 
     <!-- bootstrap -->

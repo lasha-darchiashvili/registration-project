@@ -16,7 +16,7 @@ body {
   display: flex;
 }
 
-.rightpage {
+.firstpg-rightpage {
   background-color: #fd5334;
   flex-grow: 1;
 }
@@ -68,6 +68,7 @@ section {
   color: #fff;
   margin-bottom: 12rem;
 }
+
 .firstpg-firstpartquote {
   display: flex;
   align-items: center;
@@ -90,6 +91,7 @@ section {
   font-size: 2rem;
   border-radius: 0.8rem;
   gap: 1rem;
+  border: 1px solid #212529;
 }
 
 .gonext {
@@ -107,7 +109,6 @@ section {
   top: 25%;
   left: 4%;
   width: 40rem;
-
   font-weight: 800;
 }
 
@@ -125,9 +126,11 @@ section {
   font-weight: 400;
 }
 
-.secondpg-rightpage {
+.secondpg-rightpage,
+.thirdpg-rightpage {
   background-color: #f5f5f5;
   font-family: "Open Sans", sans-serif;
+  flex-grow: 1;
 }
 
 .right-header {
@@ -153,11 +156,14 @@ section {
   font-weight: 700;
 }
 
+/* ticks is not displayed, eventually it gets displayed instead of number 1 in form tracker */
 .ticks {
   display: none;
 }
 
-.numone {
+/* this "step-one" block is displayed as block,
+eventually it becomes "display:none" and ticks icon will replace it  */
+.step-one {
   display: block;
 }
 
@@ -175,7 +181,7 @@ section {
   border-bottom: 1px solid rgba(185, 180, 196, 0.3);
 }
 
-.form-counter {
+.form-tracker {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -188,8 +194,8 @@ section {
   position: relative;
 }
 
-.info-text,
-.exp-text {
+.info-text-step,
+.exp-text-step {
   font-family: "Open Sans";
   position: absolute;
   left: 50%;
@@ -198,7 +204,7 @@ section {
   color: rgba(0, 0, 0, 1);
   font-weight: 500;
   transform: translateX(-50%);
-  white-space: nowrap;
+  white-space: nowrap; /*  second word was getting on second page and this helped  */
 }
 
 .pers-inf {
@@ -242,6 +248,7 @@ section {
 .input-field input,
 .selector {
   padding: 0.5rem 2rem;
+  padding-right: 4rem;
   border: 0;
   outline: 0;
   background-color: transparent;
@@ -254,6 +261,11 @@ section {
   font-weight: 400;
   margin-bottom: 3rem;
   color: #212529;
+}
+
+.selector {
+  padding-right: 1.5rem;
+  margin-bottom: 0;
 }
 
 .greentick {
@@ -270,10 +282,12 @@ section {
   background-color: #dee2e6;
 }
 
+/* if input gets through validation it gets "valid" class whitch gives it green tick icon */
 .input-field.valid .greentick {
   visibility: visible;
 }
 
+/* if input cant get through validation it gets "invalid" class whitch gives red color */
 .input-field.invalid input {
   background-color: #ffe3e3;
   color: rgba(220, 53, 69, 1);
@@ -297,8 +311,8 @@ input:disabled + label {
   justify-content: space-between;
 }
 
-.secondpg-goback,
-.secondpg-goback:visited {
+.goback,
+.goback:visited {
   background-color: transparent;
   cursor: pointer;
   padding: 1.2rem 2.4rem;
@@ -312,7 +326,7 @@ input:disabled + label {
   left: 0;
 }
 
-.secondpg-goback:hover {
+.goback:hover {
   border-color: #b197fc;
   background-color: #dee2e6;
 }
@@ -347,6 +361,7 @@ input:disabled + label {
   gap: 2rem;
 }
 
+/* this drop down list options gets displayed when drop down input is clicked */
 .knowledgelist,
 .characterlist {
   list-style: none;
@@ -360,9 +375,10 @@ input:disabled + label {
   padding-bottom: 1.2rem;
   background-color: #ffffff;
   max-height: 30rem;
-  overflow: scroll;
+  overflow: auto;
   scroll-behavior: smooth;
   display: none;
+  padding-left: 0;
 }
 
 /* class to make knowledge selector active via javascript */
@@ -370,6 +386,7 @@ input:disabled + label {
   display: block;
 }
 
+/* drop down list scrollbar styling */
 .forcharacter ul::-webkit-scrollbar {
   width: 4px;
   height: 0;
@@ -384,6 +401,7 @@ input:disabled + label {
   background-color: rgba(203, 207, 210, 1);
   border-radius: 100px;
 }
+/*  */
 
 .forknowledge {
   position: relative;
@@ -457,19 +475,31 @@ small {
   font-size: 2rem;
 }
 
-p {
+p,
+h1 {
   margin-bottom: 0;
 }
 
-/* date input background color was disabled from flatpicker */
+/* date input background color was disabled from flatpicker, it gets enabled again */
 .form-control:enabled {
   background-color: transparent;
 }
 
-/* flatpicker styles was overwriting my styles  */
+/* flatpicker styles was not relevant  */
 /* and this overwrites flatpicker styles */
 .form-control:focus {
   box-shadow: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.13);
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.125);
 }
+
+/* eventlistener is added on the parent element of this elements, so to prevent clicking on child elements im setting pointer-events: none */
+.knowledge,
+.character {
+  pointer-events: none;
+}
+
+.arrow-down {
+  pointer-events: none;
+}
+/*  */
