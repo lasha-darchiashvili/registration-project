@@ -78,7 +78,8 @@ section {
   margin-left: 8.5rem;
 }
 
-.buttonlink {
+.buttonlink,
+.buttonlink:visited {
   text-decoration: none;
   background-color: #212529;
   padding: 1.2rem 2.4rem;
@@ -89,6 +90,12 @@ section {
   font-size: 2rem;
   border-radius: 0.8rem;
   gap: 1rem;
+}
+
+.gonext {
+  position: absolute;
+  top: 52rem;
+  right: 0;
 }
 
 .buttonlink:hover {
@@ -207,10 +214,13 @@ section {
   color: #95939a;
   margin-bottom: 5rem;
 }
+
 .form-container {
   margin-top: 12rem;
   margin-left: 6rem;
   width: 85rem;
+  height: 60rem;
+  position: relative; /* for buttons */
 }
 
 .input-field {
@@ -242,7 +252,7 @@ section {
   height: 4.4rem;
   font-size: 2rem;
   font-weight: 400;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   color: #212529;
 }
 
@@ -282,13 +292,13 @@ input:disabled + label {
   display: none;
 } */
 
-.secondpg-buttons {
+.forthnback-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 5rem;
 }
 
-.secondpg-goback {
+.secondpg-goback,
+.secondpg-goback:visited {
   background-color: transparent;
   cursor: pointer;
   padding: 1.2rem 2.4rem;
@@ -297,6 +307,9 @@ input:disabled + label {
   text-decoration: none;
   color: rgba(33, 37, 41, 1);
   border: 1px solid rgba(33, 37, 41, 1);
+  position: absolute;
+  top: 52rem;
+  left: 0;
 }
 
 .secondpg-goback:hover {
@@ -375,11 +388,13 @@ input:disabled + label {
 .forknowledge {
   position: relative;
   width: 50%;
+  cursor: pointer;
 }
 
 .forcharacter {
   position: relative;
   width: 50%;
+  cursor: pointer;
 }
 
 .forknowledge ul li {
@@ -410,10 +425,38 @@ input:disabled + label {
   cursor: pointer;
 }
 
+small {
+  padding: 0.5rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(129, 125, 125, 1);
+  font-weight: 600;
+}
+
 .arrow-down {
   transition: 300ms;
 }
 
 .rotate {
   transform: rotate(540deg);
+}
+
+.question-div {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 7rem;
+}
+
+.answers {
+  padding-top: 1.3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.question {
+  font-size: 2rem;
+}
+
+p {
+  margin-bottom: 0;
 }
