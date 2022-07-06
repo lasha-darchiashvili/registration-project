@@ -70,6 +70,7 @@ totalCharacters.textContent = `(Total ${characterOptions.length})`;
 
 const elementSmall = document.querySelector("small");
 
+//here is done next: clicking outside of drop down lists makes lists to close.
 window.addEventListener("click", function (e) {
   if (
     knowledgelist.classList.contains("active") &&
