@@ -65,18 +65,18 @@
       <!-- this rightpage div contains header, form-page tracker and form itself -->
       <div class="thirdpg-rightpage">
         <div>
-          <p class="right-header">Start Creating Your Account</p>
+          <p class="right-header">First Step Is Done, Continue To Finish Onboarding</p>
         </div>
 
         <!-- form tracker, contains 3 divs which are displayed as flex -->
         <div class="form-tracker">
           <!-- First flex element -->
           <div class="info-block-wrapper">
-            <div class="info block">
-              <p class="step-one">1</p>
+            <div class="info block info-block-thirdpg">
+              <p class="step-one step-one-thirdpg">1</p>
 
               <!-- this ticks img is positioned "absolute" and not displayed, eventually it will replace "step-one" -->
-              <img src="./pictures/ticks.png" alt="ticks" class="ticks" />
+              <img src="./pictures/ticks.png" alt="ticks" class="ticks ticks-thirdpg" />
             </div>
 
             <!-- this p tag is positioned absolute relative to parent element -->
@@ -88,7 +88,7 @@
 
           <!-- Third flex element -->
           <div class="exp-block-wrapper">
-            <div class="exp block">
+            <div class="exp block exp-block-thirdpage">
               <p class="step-two">2</p>
             </div>
 
@@ -98,7 +98,7 @@
         </div>
 
         <!-- form element, contains headers, 2 drop down lists in 1 div, question and buttons -->
-        <form action="" class="form-container">
+        <form action="" class="form-container additional-form">
           <p class="pers-inf">Chess Experience</p>
           <p class="basic-inf">This Is Basic Information Fields</p>
 
@@ -119,6 +119,8 @@
                 <li>Intermediate</li>
                 <li>Proffesional</li>
               </ul>
+
+              <p class="knowledge-error-message">Please choose an option</p>
             </div>
 
             <!-- second drop down list -->
@@ -135,6 +137,8 @@
                     it counts after fetching data and then shows  -->
                 <small>(Total 2)</small>
 
+                <!-- ------------------- here goes fetched data ----------------------- -->
+
                 <li>
                   <p>salamala asda</p>
                   <img
@@ -143,31 +147,9 @@
                     class="characterimg"
                   />
                 </li>
-                <li>
-                  <p>Brad Pitt</p>
-                  <img
-                    src="https://www.brainscape.com/academy/content/images/2020/08/does-chess-make-you-smarter.jpg"
-                    alt="character"
-                    class="characterimg"
-                  />
-                </li>
-                <li>
-                  <p>Bob zirol</p>
-                  <img
-                    src="https://www.brainscape.com/academy/content/images/2020/08/does-chess-make-you-smarter.jpg"
-                    alt="character"
-                    class="characterimg"
-                  />
-                </li>
-                <li>
-                  <p>angelina Jolie</p>
-                  <img
-                    src="https://www.brainscape.com/academy/content/images/2020/08/does-chess-make-you-smarter.jpg"
-                    alt="character"
-                    class="characterimg"
-                  />
-                </li>
               </ul>
+
+              <p class="character-error-message">Please choose an option</p>
             </div>
           </div>
 
@@ -210,8 +192,8 @@
           <div class="forthnback-buttons">
             <a href="/peresonalinfo.html" class="goback">Back</a>
 
-            <a href="./experience.html" class="buttonlink gonext">
-              Done
+            <a href="./experience.html" class="buttonlink gonext doneinfo">
+              Next
               <img
                 src="./pictures/arrow.svg"
                 alt="arrowlogo"
@@ -229,5 +211,6 @@
     ></script>
 
     <script src="./page3.js"></script>
+    
   </body>
 </html>

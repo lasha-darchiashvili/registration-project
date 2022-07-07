@@ -9,10 +9,18 @@ const warningText = document.querySelector(".warning-text");
 const errorMessage = document.querySelector(".error-message");
 const closePopup = document.querySelector(".close-popup");
 
+const form = document.querySelector(".info-form");
+const persInfo = document.querySelector(".info");
+
+//form-counter selectors
+const stepOne = document.querySelector(".step-one");
+const ticks = document.querySelector(".ticks");
+
 // email info
 const emailEnding = "@redberry.ge";
 const emailEndingLength = emailEnding.length;
 
+// user passes validations or not
 const validation = {
   username: false,
   email: false,
@@ -23,21 +31,58 @@ const validation = {
 submitInfo.addEventListener("click", function (e) {
   e.preventDefault();
 
-  //   username validation
+  /*  this 4 functions check username,email,telephone and birthDate for validations. if conditions are not met displays error popup,
+   if conditions are met sets validation.username, validation.email, validation.telephone and validation birthDate to true */
+  usernameValidation(username);
+  emailValidation(email);
+  telephoneValidation(telephone);
+  birthDateValidation(birthDate);
+
+  //   this is doing next : if input values pass validations, button "next" takes user to the next page
+  if (
+    validation.email &&
+    validation.username &&
+    validation.telephone &&
+    validation.birthDate
+  ) {
+    hidePopup();
+    stepOne.style.display = "none";
+    ticks.style.display = "block";
+    location.href = "/experience.html";
+  }
+});
+
+// this functions is doing next => if user clicks on any input in form on second page, number 1 in form tracker changes color
+form.addEventListener("click", function (e) {
+  if (e.target.parentElement.className === "input-field") {
+    persInfo.style.backgroundColor = "rgba(233, 250, 241, 1)";
+  }
+});
+
+//   username validation, this function checks username to be mandatory and length to be more than 2 characters
+//   also this function displays error popup if conditions are not satisfied
+//   lastly it sets validation.username to true if conditions are met
+function usernameValidation(username) {
   if (username.value.trim() == "" || username.value.trim().length < 2) {
     validation.username = false;
     username.parentElement.classList.add("invalid");
     username.parentElement.classList.remove("valid");
 
+    //displays popup with these messages
     displayPopup("Invalid Username", "Please enter a valid Username");
   } else {
     username.parentElement.classList.remove("invalid");
     username.parentElement.classList.add("valid");
     validation.username = true;
   }
+}
 
-  //   taking last 12 characters of email value which should match "@redberry.ge"
-  const emailValue = email.value.trim();
+//   email validation, this function checks email to be mandatory and to have mail format (including @redberry.ge)
+//   also this function displays error popup if conditions are not satisfied
+//   lastly it sets validation.email to true if conditions are met
+function emailValidation(email) {
+  //   taking last 12 characters of email value, which should match "@redberry.ge"
+  const emailValue = email.value.trim().toLowerCase();
   const emailLength = emailValue.length;
   const emailValueEnding = emailValue.slice(
     emailLength - emailEndingLength,
@@ -45,7 +90,7 @@ submitInfo.addEventListener("click", function (e) {
   );
 
   //   email validation
-  if (emailValueEnding !== emailEnding || !testEmail(email.value.trim())) {
+  if (emailValueEnding !== emailEnding || !testEmail(emailValue)) {
     validation.email = false;
     email.parentElement.classList.add("invalid");
     email.parentElement.classList.remove("valid");
@@ -57,7 +102,12 @@ submitInfo.addEventListener("click", function (e) {
     email.parentElement.classList.add("valid");
     validation.email = true;
   }
+}
 
+//   telephone validation, this function checks telephone to be mandatory, to have 9 numbers and to have only numbers
+//   also this function displays error popup if conditions are not satisfied
+//   lastly it sets validation.telephone to true if conditions are met
+function telephoneValidation(telephone) {
   const telValue = telephone.value;
   //   phone validation
   if (telValue === "" || telValue.length !== 9 || !testTelephone(telValue)) {
@@ -75,7 +125,12 @@ submitInfo.addEventListener("click", function (e) {
     telephone.parentElement.classList.add("valid");
     validation.telephone = true;
   }
+}
 
+//   birth date validation, this function checks birth date to be mandatory
+//   also this function displays error popup if condition is not satisfied
+//   lastly it sets validation.birthDate to true if conditions are met
+function birthDateValidation(birthDate) {
   if (!birthDate.value) {
     birthDate.parentElement.classList.add("invalid");
     birthDate.parentElement.classList.remove("valid");
@@ -85,9 +140,25 @@ submitInfo.addEventListener("click", function (e) {
   } else {
     birthDate.parentElement.classList.remove("invalid");
     birthDate.parentElement.classList.add("valid");
+    validation.birthDate = true;
   }
+}
 
-  //   location.href = "/experience.html";
+// this function takes error messages as arguments and displays popap with this messages
+function displayPopup(inputWarningText, inputErrosMessage) {
+  warningText.textContent = inputWarningText;
+  errorMessage.textContent = inputErrosMessage;
+  popup.style.display = "block";
+}
+
+// this function hides error popup
+function hidePopup() {
+  popup.style.display = "none";
+}
+
+// closes popup via clicking X
+closePopup.addEventListener("click", function () {
+  popup.style.display = "none";
 });
 
 // email regex
@@ -101,17 +172,3 @@ const testEmail = function (email) {
 const testTelephone = function (telephone) {
   return /^[0-9]*$/.test(telephone);
 };
-
-function displayPopup(inputWarningText, inputErrosMessage) {
-  warningText.textContent = inputWarningText;
-  errorMessage.textContent = inputErrosMessage;
-  popup.style.display = "block";
-}
-
-function hidePopup() {
-  popup.style.display = "none";
-}
-
-closePopup.addEventListener("click", function () {
-  popup.style.display = "none";
-});
