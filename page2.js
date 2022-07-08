@@ -3,7 +3,7 @@ const submitInfo = document.querySelector(".submitinfo");
 const username = document.querySelector(".username");
 const email = document.querySelector(".email");
 const telephone = document.querySelector(".tel");
-const birthDate = document.querySelector(".form-control");
+const birthDate = document.querySelector(".textbox-date");
 const popup = document.querySelector(".popup");
 const warningText = document.querySelector(".warning-text");
 const errorMessage = document.querySelector(".error-message");
@@ -20,13 +20,49 @@ const ticks = document.querySelector(".ticks");
 const emailEnding = "@redberry.ge";
 const emailEndingLength = emailEnding.length;
 
-// user passes validations or not
+// user passes validations or not (true-false)
 const validation = {
   username: false,
   email: false,
   telephone: false,
   birthDate: false,
 };
+
+// date input in the begining is text input(because of placeholder), on focus it becomes date input
+birthDate.addEventListener("focus", function () {
+  console.log(localStorage.getItem("textbox-date"));
+
+  this.type = "date";
+  this.value = localStorage.getItem("textbox-date");
+});
+
+// if date input is blank, show placeholder
+birthDate.addEventListener("blur", function () {
+  if (!this.value) {
+    this.type = "text";
+  }
+});
+
+// calling saving-inputInfo-inLocalstorage-on-reload functions
+saveInputsOnRefresh(username, "keyup");
+saveInputsOnRefresh(email, "keyup");
+saveInputsOnRefresh(telephone, "keyup");
+saveInputsOnRefresh(birthDate, "change");
+
+// displaying localstorage info in inputs after roloading a page
+window.addEventListener("load", function () {
+  username.value = localStorage.getItem("username");
+  email.value = localStorage.getItem("email");
+  telephone.value = localStorage.getItem("tel");
+
+  if (localStorage.getItem("textbox-date")) {
+    birthDate.value = formatDate(localStorage.getItem("textbox-date"));
+  }
+
+  if (username.value || email.value || telephone.value || birthDate.value) {
+    persInfo.style.backgroundColor = "rgba(233, 250, 241, 1)";
+  }
+});
 
 submitInfo.addEventListener("click", function (e) {
   e.preventDefault();
@@ -59,7 +95,7 @@ form.addEventListener("click", function (e) {
   }
 });
 
-//   username validation, this function checks username to be mandatory and length to be more than 2 characters
+//   username validation. this function checks username to be mandatory and length to be more than 2 characters
 //   also this function displays error popup if conditions are not satisfied
 //   lastly it sets validation.username to true if conditions are met
 function usernameValidation(username) {
@@ -77,9 +113,11 @@ function usernameValidation(username) {
   }
 }
 
+// -------------------------------------- validation functions ---------------------------------------- //
+
 //   email validation, this function checks email to be mandatory and to have mail format (including @redberry.ge)
 //   also this function displays error popup if conditions are not satisfied
-//   lastly it sets validation.email to true if conditions are met
+//   lastly, it sets validation.email to true if conditions are met
 function emailValidation(email) {
   //   taking last 12 characters of email value, which should match "@redberry.ge"
   const emailValue = email.value.trim().toLowerCase();
@@ -144,7 +182,10 @@ function birthDateValidation(birthDate) {
   }
 }
 
-// this function takes error messages as arguments and displays popap with this messages
+// ---------------------------------------- validations section ending----------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------//
+
+// this function takes error messages as arguments and displays popup with this messages
 function displayPopup(inputWarningText, inputErrosMessage) {
   warningText.textContent = inputWarningText;
   errorMessage.textContent = inputErrosMessage;
@@ -172,3 +213,36 @@ const testEmail = function (email) {
 const testTelephone = function (telephone) {
   return /^[0-9]*$/.test(telephone);
 };
+
+// this function returns formated date for textbox-date
+function formatDate(dateInput) {
+  correctedDate = new Date(dateInput);
+  let date =
+    correctedDate.getDate() > 9
+      ? correctedDate.getDate()
+      : `${0}${correctedDate.getDate()}`;
+  let month =
+    correctedDate.getMonth() + 1 > 9
+      ? correctedDate.getMonth() + 1
+      : `${0}${correctedDate.getMonth() + 1}`;
+  let year = correctedDate.getFullYear();
+
+  return `${month}/${date}/${year}`;
+}
+
+// saving input info in localstorage on reload
+function saveInputsOnRefresh(input, eventType) {
+  input.addEventListener(eventType, function (e) {
+    let inputValue;
+
+    if (eventType === "change") {
+      inputValue = this.value;
+    } else {
+      //   const pressedKey = String.fromCharCode(e.keyCode);
+      inputValue = this.value;
+    }
+    console.log(inputValue);
+    console.log(input);
+    localStorage.setItem(input.className, inputValue);
+  });
+}

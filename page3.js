@@ -68,7 +68,10 @@ let secondInFormTracker = document.querySelector(".exp-block-thirdpage");
 
 // this functions is doing next => if user clicks on any input in form, on third page, number 2 in form tracker changes color
 secondForm.addEventListener("click", function (e) {
-  if (e.target.classList.contains("aroundknowledge")) {
+  if (
+    e.target.classList.contains("aroundknowledge") ||
+    e.target.parentElement.classList.contains("form-check")
+  ) {
     secondInFormTracker.style.backgroundColor = "rgba(233, 250, 241, 1)";
   }
 });

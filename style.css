@@ -22,20 +22,26 @@ body {
 }
 
 .header {
-  height: 6vh;
   display: flex;
   align-items: center;
   background-color: #7025fb;
+  height: 84px;
 }
 
 section {
-  height: 94vh;
   overflow: hidden;
-  width: 86rem;
+  height: 100%;
+  width: 100%;
 }
 
 .mainimg {
-  height: 100%;
+  width: 100%;
+}
+
+.leftpage {
+  height: 100vh;
+  overflow: hidden;
+  width: 48%;
 }
 
 .pagetitle {
@@ -47,7 +53,7 @@ section {
 .chesslogo {
   padding-left: 2rem;
   padding-right: 0.5rem;
-  width: 4rem;
+  height: 1.9rem;
 }
 
 .firstpg-firstquote {
@@ -75,7 +81,7 @@ section {
 }
 
 .firstpg-rightpagecontent {
-  margin-top: 20rem;
+  margin-top: 25rem;
   margin-left: 8.5rem;
 }
 
@@ -96,7 +102,7 @@ section {
 
 .gonext {
   position: absolute;
-  top: 52rem;
+  top: 58rem;
   right: 0;
 }
 
@@ -106,8 +112,8 @@ section {
 
 .secondpg-leftpagecontent {
   position: absolute;
-  top: 25%;
-  left: 4%;
+  top: 28%;
+  left: 7%;
   width: 40rem;
   font-weight: 800;
 }
@@ -134,10 +140,10 @@ section {
 }
 
 .right-header {
-  padding-left: 10rem;
+  padding-left: 5rem;
   font-size: 2rem;
   border-bottom: 1px solid rgba(185, 180, 195, 0.3);
-  height: 6vh;
+  height: 8.4rem;
   font-size: 1.6rem;
   display: flex;
   align-items: center;
@@ -202,8 +208,8 @@ eventually it becomes "display:none" and ticks icon will replace it  */
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 5rem;
-  margin-left: 16rem;
+  margin-top: 6rem;
+  margin-left: 11.1rem;
 }
 
 .info-block-wrapper,
@@ -235,13 +241,13 @@ eventually it becomes "display:none" and ticks icon will replace it  */
   font-weight: 600;
   font-size: 1.4rem;
   color: #95939a;
-  margin-bottom: 5rem;
+  margin-bottom: 11rem;
 }
 
 .form-container {
-  margin-top: 12rem;
-  margin-left: 9.8rem;
-  width: 90rem;
+  margin-top: 15rem;
+  margin-left: 5rem;
+  width: 77.5rem;
   height: 60rem;
   position: relative; /* for buttons */
 }
@@ -276,8 +282,11 @@ eventually it becomes "display:none" and ticks icon will replace it  */
   height: 4.4rem;
   font-size: 2rem;
   font-weight: 400;
-  margin-bottom: 3rem;
   color: #212529;
+}
+
+.input-field-wrapper {
+  margin-bottom: 5rem;
 }
 
 .selector {
@@ -339,7 +348,7 @@ input:disabled + label {
   color: rgba(33, 37, 41, 1);
   border: 1px solid rgba(33, 37, 41, 1);
   position: absolute;
-  top: 52rem;
+  top: 58rem;
   left: 0;
 }
 
@@ -479,7 +488,8 @@ small {
 .question-div {
   font-size: 1.8rem;
   font-weight: 400;
-  margin-top: 5rem;
+  margin-top: 7rem;
+  margin-left: 1rem;
 }
 
 .answers {
@@ -567,4 +577,24 @@ h1 {
   padding-left: 2rem;
   padding-top: 0.6rem;
   visibility: hidden;
+}
+
+.star {
+  color: red;
+}
+
+.textbox-date {
+}
+
+.textbox-date[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
 }
