@@ -1,4 +1,4 @@
-let characterlist = document.querySelector(".forcharacter ul");
+let characterList = document.querySelector(".forcharacter ul");
 
 const info = {
   url: "https://chess-tournament-api.devtest.ge/api/grandmasters",
@@ -36,7 +36,7 @@ function displayCharacters(data) {
        />
     `;
 
-    characterlist.append(characterWrapper);
+    characterList.append(characterWrapper);
   });
 
   // making fetched data in drop down list work. I created custom selectors for drop down list, so this was needed to make list work.
@@ -62,9 +62,67 @@ let totalCharactersBlock = document.querySelector(".characterlist small");
 let doneButton = document.querySelector(".doneinfo");
 let knowledgeError = document.querySelector(".knowledge-error-message");
 let characterError = document.querySelector(".character-error-message");
-characterlist = document.querySelector(".forcharacter ul");
+characterList = document.querySelector(".forcharacter ul");
 let secondForm = document.querySelector(".additional-form");
 let secondInFormTracker = document.querySelector(".exp-block-thirdpage");
+
+let participationYes = document.querySelector(".answer-yes");
+let participationNo = document.querySelector(".answer-no");
+
+let pageThreeHeader = document.querySelector(".right-header");
+
+const validation = {
+  knowledge: false,
+  character: false,
+  participation: true,
+};
+
+// calling saving-selectorsInfo-inLocalstorage-on-reload functions
+saveInputsOnRefresh(knowledgeValue);
+saveInputsOnRefresh(characterValue);
+
+participationYes.addEventListener("click", function () {
+  this.value = "1";
+  participationNo.value = "2";
+  localStorage.setItem("participation", this.value);
+});
+
+participationNo.addEventListener("click", function () {
+  this.value = "2";
+  participationYes.value = "1";
+  localStorage.setItem("participation", this.value);
+});
+
+// displaying localstorage info in inputs after roloading a page
+window.addEventListener("load", function () {
+  if (localStorage.knowledge) {
+    knowledgeValue.textContent = localStorage.getItem("knowledge");
+  }
+
+  if (localStorage.character) {
+    characterValue.textContent = localStorage.getItem("character");
+  }
+
+  if (localStorage.participation == 1) {
+    participationNo.checked = false;
+    participationYes.checked = true;
+  } else if (localStorage.participation == 2) {
+    participationNo.checked = true;
+    participationYes.checked = false;
+  }
+
+  if (
+    localStorage.knowledge ||
+    localStorage.character ||
+    localStorage.participation === "1" ||
+    localStorage.participation === "2"
+  ) {
+    secondInFormTracker.style.backgroundColor = "rgba(233, 250, 241, 1)";
+  }
+  if (localStorage.knowledge && localStorage.character) {
+    finishRegistration();
+  }
+});
 
 // this functions is doing next => if user clicks on any input in form, on third page, number 2 in form tracker changes color
 secondForm.addEventListener("click", function (e) {
@@ -78,7 +136,7 @@ secondForm.addEventListener("click", function (e) {
 
 // ------------------------------------------------ section -------------------------------------------//
 // make two custom lists work, first custom list is called in fetch functiion, another is called here
-// two functions that are created here are practically similiar, for one is static data and another is for dynamic data
+// two functions that are created here are practically similiar, for one is for static data and another is for dynamic data
 knowledgeListWork();
 
 function knowledgeListWork() {
@@ -93,6 +151,9 @@ function knowledgeListWork() {
     option.addEventListener("click", function () {
       knowledgeValue.textContent = option.textContent;
       toggleKnowledgeClasses();
+      if (localStorage.knowledge && localStorage.character) {
+        finishRegistration();
+      }
     });
   });
 
@@ -114,15 +175,18 @@ function characterListWork(characterOptions) {
   // and after that also closes drop-down list and rotates arrow
   characterOptions.forEach((option) => {
     option.addEventListener("click", function () {
-      characterValue.textContent = option.textContent;
+      characterValue.textContent = option.querySelector("p").textContent;
       toggleCharacterClasses();
+      if (localStorage.knowledge && localStorage.character) {
+        finishRegistration();
+      }
     });
   });
 
   // this function makes "character" drop down list active/inactive
   // and rotates arrow icon
   function toggleCharacterClasses() {
-    characterlist.classList.toggle("active");
+    characterList.classList.toggle("active");
     characterArrowIcon.classList.toggle("rotate");
   }
 
@@ -130,16 +194,6 @@ function characterListWork(characterOptions) {
   totalCharactersBlock.textContent = `(Total ${characterOptions.length})`;
 }
 // ----------------------------------section ending-----------------------------------------------//
-
-// const overlay = document.querySelector(".overlay");
-
-// overlay.addEventListener("click", function () {
-//   characterlist.classList.remove("active");
-//   characterArrowIcon.classList.remove("rotate");
-
-//   knowledgelist.classList.remove("active");
-//   knowledgeArrowIcon.classList.remove("rotate");
-// });
 
 // here is done next: clicking outside of drop down lists makes lists to close(display:none).
 window.addEventListener("click", function (e) {
@@ -151,12 +205,12 @@ window.addEventListener("click", function (e) {
     knowledgelist.classList.remove("active");
     knowledgeArrowIcon.classList.toggle("rotate");
   } else if (
-    characterlist.classList.contains("active") &&
+    characterList.classList.contains("active") &&
     e.target !== characterInput &&
-    e.target !== characterlist &&
+    e.target !== characterList &&
     e.target !== totalCharactersBlock
   ) {
-    characterlist.classList.remove("active");
+    characterList.classList.remove("active");
     characterArrowIcon.classList.toggle("rotate");
   } else return;
 });
@@ -201,3 +255,21 @@ function characterLevelValidation(characterlvl) {
   }
 }
 // --------------------------------- section ending ---------------------------------- //
+//------------------------------------------------------------------------------------//
+
+// saving input info in localstorage on reload
+function saveInputsOnRefresh(input) {
+  input.addEventListener("DOMNodeInserted", function (e) {
+    let inputValue;
+    inputValue = this.textContent;
+
+    console.log(inputValue);
+    console.log(input);
+    localStorage.setItem(input.className, inputValue);
+  });
+}
+
+function finishRegistration() {
+  doneButton.textContent = "Done";
+  pageThreeHeader.textContent = "Almost Done!";
+}

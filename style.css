@@ -583,9 +583,6 @@ h1 {
   color: red;
 }
 
-.textbox-date {
-}
-
 .textbox-date[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent;
   bottom: 0;
