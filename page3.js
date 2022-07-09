@@ -1,7 +1,10 @@
 let characterList = document.querySelector(".forcharacter ul");
 
+let characterId;
+
 const info = {
-  url: "https://chess-tournament-api.devtest.ge/api/grandmasters",
+  getDataUrl: "https://chess-tournament-api.devtest.ge/api/grandmasters",
+  sendRequestUrl: "https://chess-tournament-api.devtest.ge/api/register",
 };
 
 // fetching data function
@@ -17,15 +20,16 @@ function fetchCharacterData(url) {
 }
 
 // call fetch
-fetchCharacterData(info.url);
+fetchCharacterData(info.getDataUrl);
 
 // this function is used in fetching data function.
 // this function displays feched data in characters drop down list and also
 // second part of this function makes character list work
 function displayCharacters(data) {
   data.forEach((character) => {
-    const { name, image } = character;
+    const { name, image, id } = character;
     const characterWrapper = document.createElement("li");
+    characterId = id;
 
     characterWrapper.innerHTML = `
     <p>${name}</p>
@@ -34,6 +38,7 @@ function displayCharacters(data) {
        alt="character"
        class="characterimg"
        />
+       <div id="divCheckbox" style="display: none;">${characterId}</div>
     `;
 
     characterList.append(characterWrapper);
@@ -77,21 +82,25 @@ const validation = {
   participation: true,
 };
 
-// calling saving-selectorsInfo-inLocalstorage-on-reload functions
-saveInputsOnRefresh(knowledgeValue);
-saveInputsOnRefresh(characterValue);
+// calling saving-selectorsInfo-inLocalstorage functions
+saveInputs(knowledgeValue);
+saveInputs(characterValue);
+localStorage.setItem("participationValue", true);
 
 participationYes.addEventListener("click", function () {
-  this.value = "1";
-  participationNo.value = "2";
-  localStorage.setItem("participation", this.value);
+  setParticipationInLocalStorage(1, 2);
 });
 
 participationNo.addEventListener("click", function () {
-  this.value = "2";
-  participationYes.value = "1";
-  localStorage.setItem("participation", this.value);
+  setParticipationInLocalStorage(2, 1);
 });
+
+function setParticipationInLocalStorage(firstValue, secondValue) {
+  this.value = firstValue;
+  participationNo.value = secondValue;
+  localStorage.setItem("participation", this.value);
+  localStorage.setItem("participationValue", true);
+}
 
 // displaying localstorage info in inputs after roloading a page
 window.addEventListener("load", function () {
@@ -114,14 +123,12 @@ window.addEventListener("load", function () {
   if (
     localStorage.knowledge ||
     localStorage.character ||
-    localStorage.participation === "1" ||
-    localStorage.participation === "2"
+    localStorage.participationValue
   ) {
     secondInFormTracker.style.backgroundColor = "rgba(233, 250, 241, 1)";
   }
-  if (localStorage.knowledge && localStorage.character) {
-    finishRegistration();
-  }
+
+  finishRegistrationStep();
 });
 
 // this functions is doing next => if user clicks on any input in form, on third page, number 2 in form tracker changes color
@@ -151,9 +158,8 @@ function knowledgeListWork() {
     option.addEventListener("click", function () {
       knowledgeValue.textContent = option.textContent;
       toggleKnowledgeClasses();
-      if (localStorage.knowledge && localStorage.character) {
-        finishRegistration();
-      }
+
+      finishRegistrationStep();
     });
   });
 
@@ -177,9 +183,13 @@ function characterListWork(characterOptions) {
     option.addEventListener("click", function () {
       characterValue.textContent = option.querySelector("p").textContent;
       toggleCharacterClasses();
-      if (localStorage.knowledge && localStorage.character) {
-        finishRegistration();
-      }
+
+      finishRegistrationStep();
+
+      localStorage.setItem(
+        "id",
+        option.querySelector("#divCheckbox").textContent
+      );
     });
   });
 
@@ -228,8 +238,8 @@ doneButton.addEventListener("click", function (e) {
   knowledgeLevelValidation(knowledgeValue.textContent);
   characterLevelValidation(characterValue.textContent);
 
-  if (formValidation.knowledge && formValidation.character) {
-    console.log(this.textContent);
+  if (localStorage.knowledge && localStorage.character) {
+    sendData();
   }
 });
 
@@ -257,11 +267,17 @@ function characterLevelValidation(characterlvl) {
 // --------------------------------- section ending ---------------------------------- //
 //------------------------------------------------------------------------------------//
 
-// saving input info in localstorage on reload
-function saveInputsOnRefresh(input) {
+// saving input info in localstorage
+function saveInputs(input) {
   input.addEventListener("DOMNodeInserted", function (e) {
     let inputValue;
     inputValue = this.textContent;
+
+    if (input === knowledgeValue) {
+      inputValue = inputValue.toLowerCase();
+    }
+
+    console.log(inputValue);
 
     console.log(inputValue);
     console.log(input);
@@ -269,7 +285,48 @@ function saveInputsOnRefresh(input) {
   });
 }
 
-function finishRegistration() {
-  doneButton.textContent = "Done";
-  pageThreeHeader.textContent = "Almost Done!";
+function finishRegistrationStep() {
+  if (localStorage.knowledge && localStorage.character) {
+    doneButton.textContent = "Done";
+    pageThreeHeader.textContent = "Almost Done!";
+  }
+}
+
+function sendData() {
+  if (localStorage.participationValue === "true") {
+    participationBoolean = true;
+  } else if (localStorage.participationValue === "false") {
+    participationBoolean = false;
+  }
+
+  let experience;
+
+  if (localStorage.knowledge === "intermediate") {
+    experience = "normal";
+  } else {
+    experience = localStorage.knowledge;
+  }
+
+  characterId = Number(characterId);
+
+  const dataToSend = {
+    name: `${localStorage.username}`,
+    email: `${localStorage.email}`,
+    phone: `${localStorage.tel}`,
+    date_of_birth: `${localStorage.textboxdate}`,
+    experience_level: `${experience}`,
+    already_participated: participationBoolean,
+    character_id: characterId,
+  };
+
+  fetch(info.sendRequestUrl, {
+    method: "post",
+    body: JSON.stringify(dataToSend),
+    headers: {
+      "Content-Type": "application/JSON",
+    },
+  })
+    .then((response) => console.log(response))
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 }

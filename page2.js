@@ -3,7 +3,7 @@ const submitInfo = document.querySelector(".submitinfo");
 const username = document.querySelector(".username");
 const email = document.querySelector(".email");
 const telephone = document.querySelector(".tel");
-const birthDate = document.querySelector(".textbox-date");
+const birthDate = document.querySelector(".textboxdate");
 const popup = document.querySelector(".popup");
 const warningText = document.querySelector(".warning-text");
 const errorMessage = document.querySelector(".error-message");
@@ -30,10 +30,10 @@ const validation = {
 
 // date input in the begining is text input(because of placeholder), on focus it becomes date input
 birthDate.addEventListener("focus", function () {
-  console.log(localStorage.getItem("textbox-date"));
+  console.log(localStorage.getItem("textboxdate"));
 
   this.type = "date";
-  this.value = localStorage.getItem("textbox-date");
+  this.value = localStorage.getItem("textboxdate");
 });
 
 // if date input is blank, show placeholder
@@ -55,8 +55,8 @@ window.addEventListener("load", function () {
   email.value = localStorage.getItem("email");
   telephone.value = localStorage.getItem("tel");
 
-  if (localStorage.getItem("textbox-date")) {
-    birthDate.value = formatDate(localStorage.getItem("textbox-date"));
+  if (localStorage.getItem("textboxdate")) {
+    birthDate.value = formatDate(localStorage.getItem("textboxdate"));
   }
 
   if (username.value || email.value || telephone.value || birthDate.value) {
