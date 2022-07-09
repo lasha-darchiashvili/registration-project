@@ -327,6 +327,12 @@ function sendData() {
     },
   })
     .then((response) => console.log(response))
-    .then((data) => console.log(data))
+    .then((data) => redirectToOnboarding())
     .catch((err) => console.log(err));
+}
+
+function redirectToOnboarding() {
+  if (formValidation.character && formValidation.knowledge) {
+    location.href = "/onboarding.html";
+  }
 }
