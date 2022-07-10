@@ -246,3 +246,21 @@ function saveInputsOnRefresh(input, eventType) {
     localStorage.setItem(input.className, inputValue);
   });
 }
+
+const inputField = document.querySelectorAll(".allinput");
+
+inputField.forEach((input) => {
+  input.addEventListener("focus", function () {
+    console.log(input);
+    input.parentElement.querySelector(".placeholder-replacer").style.display =
+      "none";
+  });
+});
+inputField.forEach((input) => {
+  input.addEventListener("blur", function () {
+    if (!input.value) {
+      input.parentElement.querySelector(".placeholder-replacer").style.display =
+        "block";
+    }
+  });
+});
