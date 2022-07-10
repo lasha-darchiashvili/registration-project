@@ -10,6 +10,19 @@ html {
 
 body {
   font-family: "Nunito", sans-serif;
+  animation: transitionIn 0.75s;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-12deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }
 
 .firstwrapper {
@@ -355,6 +368,7 @@ input:disabled + label {
 .goback:hover {
   border-color: #b197fc;
   background-color: #dee2e6;
+  color: #212529;
 }
 
 .thirdpg-secondquote {

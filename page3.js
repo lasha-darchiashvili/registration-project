@@ -122,7 +122,7 @@ window.addEventListener("load", function () {
     participationYes.checked = false;
   }
 
-  // turning green number 2 in form counter if something was chosen before reload in form
+  // turning green number 2 in form counter if something was chosen before reload, in form
   if (
     localStorage.knowledge ||
     localStorage.character ||
@@ -137,11 +137,11 @@ window.addEventListener("load", function () {
   if (localStorage.characterValidation) {
     formValidation.character = true;
   }
-  // changing button name and page header after reload
+  // changing button name and page header after reload, if relevant
   finishRegistrationStep();
 });
 
-// this functions is doing next => if user clicks on any input in form, on third page, number 2 in form tracker changes color
+// this addEventListener is doing next => if user clicks on any input in form, on third page, number 2 in form tracker changes color
 secondForm.addEventListener("click", function (e) {
   if (
     e.target.classList.contains("aroundknowledge") ||
@@ -268,7 +268,6 @@ function knowledgeLevelValidation(knowledgelvl) {
   if (knowledgelvl === "level of knowledge *") {
     formValidation.knowledge = false;
     knowledgeError.style.visibility = "visible";
-    console.log("fffa");
   }
 }
 
@@ -291,11 +290,6 @@ function saveInputs(input) {
     if (input === knowledgeValue) {
       inputValue = inputValue.toLowerCase();
     }
-
-    console.log(inputValue);
-
-    console.log(inputValue);
-    console.log(input);
     localStorage.setItem(input.className, inputValue);
   });
 }
@@ -310,6 +304,7 @@ function finishRegistrationStep() {
 
 // function that sends http request
 function sendData() {
+  let participationBoolean;
   if (localStorage.participationValue === "true") {
     participationBoolean = true;
   } else if (localStorage.participationValue === "false") {

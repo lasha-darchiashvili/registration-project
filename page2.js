@@ -28,10 +28,11 @@ const validation = {
   birthDate: false,
 };
 
+// this function shows placeholder or hides, depends on if inputs are filled or not
+showOrHidePlaceholder();
+
 // date input in the begining is text input(because of placeholder), on focus it becomes date input
 birthDate.addEventListener("focus", function () {
-  console.log(localStorage.getItem("textboxdate"));
-
   this.type = "date";
   this.value = localStorage.getItem("textboxdate");
 });
@@ -62,17 +63,29 @@ window.addEventListener("load", function () {
   if (username.value || email.value || telephone.value || birthDate.value) {
     persInfo.style.backgroundColor = "rgba(233, 250, 241, 1)";
   }
+
+  //  these functions is doint next: if input value is filled, delete placeholder after reload and show text
+  adjustPlaceholderOnReload(username);
+  adjustPlaceholderOnReload(email);
+  adjustPlaceholderOnReload(telephone);
+  adjustPlaceholderOnReload(birthDate);
 });
 
 submitInfo.addEventListener("click", function (e) {
   e.preventDefault();
 
   /*  this 4 functions check username,email,telephone and birthDate for validations. if conditions are not met displays error popup,
-   if conditions are met sets validation.username, validation.email, validation.telephone and validation birthDate to true */
+   if conditions are met, sets validation.username, validation.email, validation.telephone and validation birthDate to true */
   usernameValidation(username);
-  emailValidation(email);
-  telephoneValidation(telephone);
-  birthDateValidation(birthDate);
+  if (validation.username) {
+    emailValidation(email);
+    if (validation.email) {
+      telephoneValidation(telephone);
+    }
+    if (validation.telephone) {
+      birthDateValidation(birthDate);
+    }
+  }
 
   //   this is doing next : if input values pass validations, button "next" takes user to the next page
   if (
@@ -95,6 +108,8 @@ form.addEventListener("click", function (e) {
   }
 });
 
+// -------------------------------------- validation functions ---------------------------------------- //
+
 //   username validation. this function checks username to be mandatory and length to be more than 2 characters
 //   also this function displays error popup if conditions are not satisfied
 //   lastly it sets validation.username to true if conditions are met
@@ -112,8 +127,6 @@ function usernameValidation(username) {
     validation.username = true;
   }
 }
-
-// -------------------------------------- validation functions ---------------------------------------- //
 
 //   email validation, this function checks email to be mandatory and to have mail format (including @redberry.ge)
 //   also this function displays error popup if conditions are not satisfied
@@ -241,26 +254,32 @@ function saveInputsOnRefresh(input, eventType) {
       //   const pressedKey = String.fromCharCode(e.keyCode);
       inputValue = this.value;
     }
-    console.log(inputValue);
-    console.log(input);
     localStorage.setItem(input.className, inputValue);
   });
 }
 
-const inputField = document.querySelectorAll(".allinput");
+function showOrHidePlaceholder() {
+  let inpp = document.querySelectorAll(".input-field input");
+  inpp.forEach((input) => {
+    input.addEventListener("focus", function () {
+      input.parentElement.querySelector(".placeholder-replacer").style.display =
+        "none";
+    });
+  });
+  inpp.forEach((input) => {
+    input.addEventListener("blur", function () {
+      if (!input.value) {
+        input.parentElement.querySelector(
+          ".placeholder-replacer"
+        ).style.display = "block";
+      }
+    });
+  });
+}
 
-inputField.forEach((input) => {
-  input.addEventListener("focus", function () {
-    console.log(input);
+function adjustPlaceholderOnReload(input) {
+  if (input.value) {
     input.parentElement.querySelector(".placeholder-replacer").style.display =
       "none";
-  });
-});
-inputField.forEach((input) => {
-  input.addEventListener("blur", function () {
-    if (!input.value) {
-      input.parentElement.querySelector(".placeholder-replacer").style.display =
-        "block";
-    }
-  });
-});
+  }
+}
