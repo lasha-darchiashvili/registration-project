@@ -1,5 +1,6 @@
 let characterList = document.querySelector(".forcharacter ul");
 
+// characterid is set in fetch function and then saved in localstorage
 let characterId;
 
 const info = {
@@ -44,8 +45,8 @@ function displayCharacters(data) {
     characterList.append(characterWrapper);
   });
 
-  // making fetched data in drop down list work. I created custom selectors for drop down list, so this was needed to make list work.
-  // function takes 4 fetched items and makes them clickable, also makes custom drop down list arrow work.
+  // making fetched data in drop down list work. I created custom selectors for drop down list, so this was needed to make a list work.
+  // function takes 4 fetched items and makes them clickable, also makes custom drop down list arrow icon work.
   let characterOptions = document.querySelectorAll(".characterlist li");
   characterListWork(characterOptions);
 }
@@ -87,6 +88,7 @@ saveInputs(knowledgeValue);
 saveInputs(characterValue);
 localStorage.setItem("participationValue", true);
 
+// set participation values in local storage
 participationYes.addEventListener("click", function () {
   setParticipationInLocalStorage(1, 2);
 });
@@ -120,14 +122,22 @@ window.addEventListener("load", function () {
     participationYes.checked = false;
   }
 
+  // turning green number 2 in form counter if something was chosen before reload in form
   if (
     localStorage.knowledge ||
     localStorage.character ||
-    localStorage.participationValue
+    localStorage.participation
   ) {
     secondInFormTracker.style.backgroundColor = "rgba(233, 250, 241, 1)";
   }
 
+  if (localStorage.knowledgeValidation) {
+    formValidation.knowledge = true;
+  }
+  if (localStorage.characterValidation) {
+    formValidation.character = true;
+  }
+  // changing button name and page header after reload
   finishRegistrationStep();
 });
 
@@ -135,6 +145,7 @@ window.addEventListener("load", function () {
 secondForm.addEventListener("click", function (e) {
   if (
     e.target.classList.contains("aroundknowledge") ||
+    e.target.classList.contains("aroundcharacter") ||
     e.target.parentElement.classList.contains("form-check")
   ) {
     secondInFormTracker.style.backgroundColor = "rgba(233, 250, 241, 1)";
@@ -156,14 +167,19 @@ function knowledgeListWork() {
   // and after that also closes drop-down list and rotates arrow
   knowledgeOptions.forEach((option) => {
     option.addEventListener("click", function () {
+      knowledgeError.style.visibility = "hidden";
+      formValidation.knowledge = true;
+      localStorage.setItem("knowledgeValidation", true);
+
       knowledgeValue.textContent = option.textContent;
       toggleKnowledgeClasses();
 
+      // changing button name and page header(certain requirements should be met)
       finishRegistrationStep();
     });
   });
 
-  // this function makes "knowledge-level" drop downl list active/inactive
+  // this function makes "knowledge-level" drop down list active/inactive
   // and rotates arrow icon
   function toggleKnowledgeClasses() {
     knowledgelist.classList.toggle("active");
@@ -181,6 +197,10 @@ function characterListWork(characterOptions) {
   // and after that also closes drop-down list and rotates arrow
   characterOptions.forEach((option) => {
     option.addEventListener("click", function () {
+      characterError.style.visibility = "hidden";
+      formValidation.character = true;
+      localStorage.setItem("characterValidation", true);
+
       characterValue.textContent = option.querySelector("p").textContent;
       toggleCharacterClasses();
 
@@ -245,23 +265,18 @@ doneButton.addEventListener("click", function (e) {
 
 // this functions activates error message if condition in not met
 function knowledgeLevelValidation(knowledgelvl) {
-  if (knowledgelvl === "level of knowledge") {
+  if (knowledgelvl === "level of knowledge *") {
     formValidation.knowledge = false;
     knowledgeError.style.visibility = "visible";
-  } else {
-    knowledgeError.style.visibility = "hidden";
-    formValidation.knowledge = true;
+    console.log("fffa");
   }
 }
 
 // this functions activates error message if condition in not met
 function characterLevelValidation(characterlvl) {
-  if (characterlvl === "Choose your character") {
+  if (characterlvl === "Choose your character *") {
     formValidation.character = false;
     characterError.style.visibility = "visible";
-  } else {
-    characterError.style.visibility = "hidden";
-    formValidation.character = true;
   }
 }
 // --------------------------------- section ending ---------------------------------- //
@@ -285,6 +300,7 @@ function saveInputs(input) {
   });
 }
 
+// changes button text and page header text
 function finishRegistrationStep() {
   if (localStorage.knowledge && localStorage.character) {
     doneButton.textContent = "Done";
@@ -292,6 +308,7 @@ function finishRegistrationStep() {
   }
 }
 
+// function that sends http request
 function sendData() {
   if (localStorage.participationValue === "true") {
     participationBoolean = true;
@@ -301,6 +318,7 @@ function sendData() {
 
   let experience;
 
+  // api accepts word "normal" and on the page its displayed as "intermediate", so this change fixes problem
   if (localStorage.knowledge === "intermediate") {
     experience = "normal";
   } else {
@@ -331,8 +349,10 @@ function sendData() {
     .catch((err) => console.log(err));
 }
 
+// this function finilizes registration and is use in "sending request" function
 function redirectToOnboarding() {
   if (formValidation.character && formValidation.knowledge) {
     location.href = "/onboarding.html";
   }
+  localStorage.clear();
 }
