@@ -77,15 +77,11 @@ submitInfo.addEventListener("click", function (e) {
   /*  this 4 functions check username,email,telephone and birthDate for validations. if conditions are not met displays error popup,
    if conditions are met, sets validation.username, validation.email, validation.telephone and validation birthDate to true */
   usernameValidation(username);
-  if (validation.username) {
-    emailValidation(email);
-    if (validation.email) {
-      telephoneValidation(telephone);
-    }
-    if (validation.telephone) {
-      birthDateValidation(birthDate);
-    }
-  }
+
+  emailValidation(email);
+
+  telephoneValidation(telephone);
+  birthDateValidation(birthDate);
 
   //   this is doing next : if input values pass validations, button "next" takes user to the next page
   if (
