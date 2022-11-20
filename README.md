@@ -1,4 +1,4 @@
-# Project -  To-Do-list
+# Project -  Registration
 You can see deployment <a href="https://sweet-malasada-4e730c.netlify.app/" target="_blank">here</a>
 
 <h1>PLEASE KEEP IN MIND</h1>
