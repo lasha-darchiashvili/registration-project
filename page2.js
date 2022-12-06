@@ -17,7 +17,7 @@ const stepOne = document.querySelector(".step-one");
 const ticks = document.querySelector(".ticks");
 
 // email info
-const emailEnding = "@redberry.ge";
+const emailEnding = "@gmail.com";
 const emailEndingLength = emailEnding.length;
 
 // user passes validations or not (true-false)
@@ -124,11 +124,11 @@ function usernameValidation(username) {
   }
 }
 
-//   email validation, this function checks email to be mandatory and to have mail format (including @redberry.ge)
+//   email validation, this function checks email to be mandatory and to have mail format (including @gmail.com)
 //   also this function displays error popup if conditions are not satisfied
 //   lastly, it sets validation.email to true if conditions are met
 function emailValidation(email) {
-  //   taking last 12 characters of email value, which should match "@redberry.ge"
+  //   taking last characters of email value, which should match "@gmail.com"
   const emailValue = email.value.trim().toLowerCase();
   const emailLength = emailValue.length;
   const emailValueEnding = emailValue.slice(
@@ -142,7 +142,10 @@ function emailValidation(email) {
     email.parentElement.classList.add("invalid");
     email.parentElement.classList.remove("valid");
     if (validation.username) {
-      displayPopup("Invalid Email", "Please enter a valid email");
+      displayPopup(
+        "Invalid Email",
+        "Please enter a valid email (yourmail@gmail.com)"
+      );
     }
   } else {
     email.parentElement.classList.remove("invalid");
@@ -164,7 +167,7 @@ function telephoneValidation(telephone) {
     if (validation.email && validation.username) {
       displayPopup(
         "Invalid Telephone Number",
-        "Please enter a valid Telephone Number"
+        "Please enter a valid Telephone Number (9 numbers)"
       );
     }
   } else {
