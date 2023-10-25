@@ -351,3 +351,57 @@ function redirectToOnboarding() {
   }
   localStorage.clear();
 }
+
+// --------------------------------------------------------
+
+data4 = [
+  {
+    name: "Nona Gaprindashvili",
+    image:
+      "https://app.fide.com/upload/9851/3e2cad26edd91e519d091e2982b9e7e1.jpg",
+    id: 1,
+  },
+  {
+    name: "Queens Gambit",
+    image: "https://www.refinery29.com/images/9993213.jpg",
+    id: 2,
+  },
+  {
+    name: "Garry Kasparov",
+    image:
+      "https://www.chessjournal.com/wp-content/uploads/2021/08/Garry-Kasparov-Chess-Grandmaster.jpg",
+    id: 3,
+  },
+  {
+    name: "Messi & Ronaldo",
+    image: "https://pbs.twimg.com/media/Fh8dvWPXwAE5FPJ.jpg:large",
+    id: 4,
+  },
+];
+
+function displayCharacters(data) {
+  data.forEach((character) => {
+    const { name, image, id } = character;
+    const characterWrapper = document.createElement("li");
+    characterId = id;
+
+    characterWrapper.innerHTML = `
+    <p>${name}</p>
+       <img
+       src="${image}"
+       alt="character"
+       class="characterimg"
+       />
+       <div id="divCheckbox" style="display: none;">${characterId}</div>
+    `;
+
+    characterList.append(characterWrapper);
+  });
+
+  // making fetched data in drop down list work. I created custom selectors for drop down list, so this was needed to make a list work.
+  // function takes 4 fetched items and makes them clickable, also makes custom drop down list arrow icon work.
+  let characterOptions = document.querySelectorAll(".characterlist li");
+  characterListWork(characterOptions);
+}
+
+displayCharacters(data4);
